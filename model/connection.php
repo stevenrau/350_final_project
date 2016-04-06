@@ -13,7 +13,7 @@
         private static $servername = "localhost";
         private static $username = "root";
         private static $password = "";
-        private static $db_name = "music";
+        private static $db_name = "music_final_project";
 
         // Constructor does nothing because we only want once DB instance
         private function __construct() {}
@@ -53,3 +53,4 @@
         }
     }
 ?>
+

@@ -150,7 +150,7 @@ class Artists_Controller
                // Rename the image
                rename($oldImage, $newImage);
 
-               $newAbsolute = "/350_a3/artist_thumbnail/" . basename($newImage);
+               $newAbsolute = "/350_final_project/artist_thumbnail/" . basename($newImage);
 
                // And update the url in the db
                Artist::updateArtistThumbUrl($artistId, $newAbsolute);
@@ -182,7 +182,7 @@ class Artists_Controller
           }
 
           // Use absolute path to the image in the DB
-          $absolutePath = "/350_a3/artist_thumbnail/" . $newFileName;
+          $absolutePath = "/350_final_project/artist_thumbnail/" . $newFileName;
           $success = Artist::updateArtistThumbUrl($artistId, $absolutePath);
 
           if ($success)

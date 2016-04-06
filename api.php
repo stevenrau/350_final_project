@@ -33,7 +33,7 @@
      * Includes the controller necessary for the requested operation
      * If it is an invalid URI param, do not bother including anything.
      *
-     * ex: 350_a3/api.php/albums/  Needs to include controller/albums_controller.php
+     * ex: 350_final_project/api.php/albums/  Needs to include controller/albums_controller.php
      *
      * NOTE: # is used as my preg_match delimeter
      */

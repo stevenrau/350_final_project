@@ -1,6 +1,6 @@
--- Create and select the database
-CREATE DATABASE IF NOT EXISTS music ;
-USE music ;
+-- Create and select the database (name it different than the other assignments since we will add funtionatlity)
+CREATE DATABASE IF NOT EXISTS music_final_project ;
+USE music_final_project ;
 
 
 -- Create the three tables
@@ -9,7 +9,7 @@ CREATE TABLE IF NOT EXISTS artists
 (
   id             int(6)       UNSIGNED AUTO_INCREMENT PRIMARY KEY,
   name           varchar(50)  NOT NULL,
-  thumbnail_url  varchar(256) DEFAULT '/350_a3/artist_thumbnail/default.png'
+  thumbnail_url  varchar(256) DEFAULT '/350_final_project/artist_thumbnail/default.png'
            -- Artist thumnbnail img URL can be empty since we want to allow creating an
            -- artist without providing a thumbnail image.
            -- If thumbnail image is provided for an album, it will be stored in
@@ -21,7 +21,7 @@ CREATE TABLE IF NOT EXISTS albums
   id           int(6)         UNSIGNED AUTO_INCREMENT PRIMARY KEY,
   title        varchar(50)    NOT NULL,
   artist_id    int(6)         UNSIGNED NOT NULL,
-  artwork_url  varchar(256)   DEFAULT '/350_a3/artwork/default.png',
+  artwork_url  varchar(256)   DEFAULT '/350_final_project/artwork/default.png',
            -- Artwork URL can be empty since we want to allow creating an
            -- album without providing artwork
            -- If atwork is provided for an album, it will be stored in a file
@@ -54,9 +54,9 @@ INSERT INTO artists(name) VALUES ('Taylor Swift');
 INSERT INTO artists(name) VALUES ('Johnny Cash');
 
 -- Give some of the artists thumbnails
-UPDATE artists SET thumbnail_url='/350_a3/artist_thumbnail/John Denver.jpg' WHERE name='John Denver';
-UPDATE artists SET thumbnail_url='/350_a3/artist_thumbnail/Adele.jpg' WHERE name='Adele';
-UPDATE artists SET thumbnail_url='/350_a3/artist_thumbnail/Taylor Swift.jpg' WHERE name='Taylor Swift';
+UPDATE artists SET thumbnail_url='/350_final_project/artist_thumbnail/John Denver.jpg' WHERE name='John Denver';
+UPDATE artists SET thumbnail_url='/350_final_project/artist_thumbnail/Adele.jpg' WHERE name='Adele';
+UPDATE artists SET thumbnail_url='/350_final_project/artist_thumbnail/Taylor Swift.jpg' WHERE name='Taylor Swift';
 
 
 -- Insert albums into the table
@@ -65,8 +65,8 @@ INSERT INTO albums(title, artist_id) VALUES ('25', 3);
 INSERT INTO albums(title, artist_id) VALUES ('1989', 4);
 
 -- Give some of the albums artwork
-UPDATE albums SET artwork_url='/350_a3/artwork/To Pimp a Butterfly.png' WHERE title='To Pimp a Butterfly';
-UPDATE albums SET artwork_url='/350_a3/artwork/1989.jpg' WHERE title='1989';
+UPDATE albums SET artwork_url='/350_final_project/artwork/To Pimp a Butterfly.png' WHERE title='To Pimp a Butterfly';
+UPDATE albums SET artwork_url='/350_final_project/artwork/1989.jpg' WHERE title='1989';
 
 
 -- Insert tracks into the table

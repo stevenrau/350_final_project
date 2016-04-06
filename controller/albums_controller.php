@@ -152,7 +152,7 @@ class Albums_Controller
                // Rename the image
                rename($oldImage, $newImage);
 
-               $newAbsolute = "/350_a3/artwork/" . basename($newImage);
+               $newAbsolute = "/350_final_project/artwork/" . basename($newImage);
 
                // And update the url in the db
                Album::updateAlbumArtUrl($albumId, $newAbsolute);
@@ -184,7 +184,7 @@ class Albums_Controller
           }
 
           // Use absolute path to the image in the DB
-          $absolutePath = "/350_a3/artwork/" . $newFileName;
+          $absolutePath = "/350_final_project/artwork/" . $newFileName;
           $success = Album::updateAlbumArtUrl($albumId, $absolutePath);
 
           if ($success)
