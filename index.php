@@ -36,9 +36,43 @@
                 <div id="main_text"> Please login to access the site contents. </div>
             <?php } ?>
 
-
         </div>
 
+        <!-- Map div. Always start at the U of S for simplicity's sake -->
+        <div id="location_div">
+            <div class="element">
+                <input type="submit" class="button" id="get_location" name="get_location" value="Get my location" >
+            </div>
+
+            <div class="element">
+                <div id="map">
+                    <iframe id="google_map"
+                      width="450"
+                      height="250"
+                      frameborder="0" style="border:0"
+                      src="https://www.google.com/maps/embed/v1/search?key=AIzaSyDEx3MPx7UglM3SSIAsBm620nMvlDTse1c&q=university+of+saskatchewan" allowfullscreen>
+                    </iframe>
+                </div>
+            </div>
+        </div>
+
+        <!-- Map controller script -->
+        <script type="text/javascript">
+
+            var c = function(pos){
+
+                var lat = pos.coords.latitude,
+                    long = pos.coords.longitude,
+                    coords = lat + ',' + long;
+
+                document.getElementById('google_map').setAttribute('src', 'https://maps.google.com?q=' + coords + '&z=60&output=embed')
+            }
+
+            document.getElementById("get_location").onclick= function(){
+                navigator.geolocation.getCurrentPosition(c);
+                return false;
+            }
+        </script>
 
 
         <footer>

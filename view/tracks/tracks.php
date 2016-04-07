@@ -92,7 +92,6 @@
 
         </div>
 
-
         <footer>
             <small id="footer_copyright">Copyright &copy; 2016 Steven Rau</small>
         </footer>
