@@ -12,25 +12,38 @@
           public $artwork_url;
           public $artist;
           public $album;
+          public $video_url;
 
-          public function __construct($id, $title, $artwork_url, $artist, $album)
+          public function __construct($id, $title, $artwork_url, $artist, $album, $vidUrl)
           {
                $this->id = $id;
                $this->title = $title;
                $this->artwork_url = $artwork_url;
                $this->artist = $artist;
                $this->album = $album;
+               $this->video_url = $vidUrl;
           }
 
           /*
            * Adds a new track to the model with the given title, artist ID, and album ID
            */
-          public static function addTrack($title, $artistId, $albumId)
+          public static function addTrack($title, $artistId, $albumId, $vidUrl)
           {
                $db = Database::getInstance();
 
                // insert the new track info
-               $sql = 'INSERT INTO tracks(title, artist_id, album_id) VALUES (\'' . $title . '\', ' .            $artistId . ', ' . $albumId . ')';
+               // If a URL was provided, use it
+               if ($vidUrl != null)
+               {
+
+                  $sql = 'INSERT INTO tracks(title, artist_id, album_id, video_url) VALUES (\'' . $title         . '\', ' . $artistId . ', ' . $albumId . ', \'' . $vidUrl . '\')';
+               }
+              // Otherwise ignore it and it will default to null
+              else
+              {
+                  $sql = 'INSERT INTO tracks(title, artist_id, album_id) VALUES (\'' . $title .                '\', ' . $artistId . ', ' . $albumId . ')';
+              }
+
                $succ = $db->query($sql);
 
               $newId = $db->insert_id;
@@ -61,7 +74,7 @@
                $album = Album::getAlbum($track['album_id']);
 
                return new Track($track['id'], $track['title'], $album->artwork_url,
-                                $artist->name, $album->title);
+                                $artist->name, $album->title, $track['video_url']);
           }
 
           /*
@@ -103,7 +116,7 @@
                     $curAlbum = Album::getAlbum($track['album_id']);
 
                     $list[] = new Track($track['id'], $track['title'], $curAlbum->artwork_url,
-                                        $curArtist->name, $curAlbum->title);
+                                        $curArtist->name, $curAlbum->title, $track['video_url']);
                }
 
                return $list;
@@ -117,6 +130,26 @@
                $db = Database::getInstance();
 
                $sql = 'UPDATE tracks SET title=\'' . $newTrackTitle . '\' WHERE id=' . $trackId;
+
+               $succ = $db->query($sql);
+
+              // If nothing was done, that means the ID does not exist in the DB
+              if (mysqli_affected_rows($db) == 0)
+              {
+                  return False;
+              }
+
+               return $succ;
+          }
+
+         /*
+           * Updates the given track's video URL
+           */
+          public static function updateTrackVidUrl($trackId, $newVidUrl)
+          {
+               $db = Database::getInstance();
+
+               $sql = 'UPDATE tracks SET video_url=\'' . $newVidUrl . '\' WHERE id=' . $trackId;
 
                $succ = $db->query($sql);
 

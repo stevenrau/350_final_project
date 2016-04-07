@@ -33,8 +33,9 @@ class Tracks_Controller
       * @param[in] title    The new track's title
       * @param[in] artist   Artis name for the new track
       * @param[in] album    Album name for the new track
+      * @param[in] vidUrl   Music video Url for the new track (optional, can be null)
       */
-     public function addTrack($title, $artist, $album)
+     public function addTrack($title, $artist, $album, $vidUrl)
      {
           if(0 == strlen($title) || 0 == strlen($artist) || 0 == strlen($album))
           {
@@ -60,7 +61,7 @@ class Tracks_Controller
                $albumId = Album::addAlbum($album, $artistId);
           }
 
-          $newId = Track::addTrack($title, $artistId, $albumId);
+          $newId = Track::addTrack($title, $artistId, $albumId, $vidUrl);
 
           // If the new Id is negative, soemthing went wrong
           if ($newId < 0)
@@ -138,6 +139,41 @@ class Tracks_Controller
           }
 
      }
+
+    /**
+     * Updates a track's video URL
+     *
+     * @param[in] trackId    ID of the track to update
+     * @param[in] newVidUrl  URL of the new music video
+     */
+    public function updateTrackVidUrl($trackId, $newVidUrl)
+    {
+        if(0 == strlen($newVidUrl))
+        {
+            // Display an alert window and return if the field was empty
+            echo "<script type=\"text/javascript\">
+                 alert(\"The new video URL field cannot be empty\");
+                 </script>";
+
+            return;
+        }
+
+        $success = Track::updateTrackVidUrl($trackId, $newVidUrl);
+        if ($success)
+        {
+            echo "<script type=\"text/javascript\">
+                 alert(\"Successfully updated the video URL\");
+                 </script>";
+        }
+        else
+        {
+            echo "<script type=\"text/javascript\">
+                  alert(\"ERROR: Could not update the video URL\");
+                  </script>";
+
+            return;
+        }
+    }
 
     /* --------------------------------------------------------------------------------------------
      * API controller functions

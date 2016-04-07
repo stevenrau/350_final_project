@@ -38,6 +38,7 @@ CREATE TABLE IF NOT EXISTS tracks
   title      varchar(50)  NOT NULL,
   artist_id  int(6)       UNSIGNED NOT NULL,
   album_id   int(6)       UNSIGNED NOT NULL,
+  video_url  varchar(256) DEFAULT NULL,
   FOREIGN KEY (artist_id) REFERENCES artists(id) ON DELETE CASCADE ON UPDATE CASCADE,
            -- Cascade DELETE from parent table 'artists' to this child table
            -- i.e. If an artist is deleted from the artist table, all records
@@ -70,9 +71,9 @@ UPDATE albums SET artwork_url='/350_final_project/artwork/1989.jpg' WHERE title=
 
 
 -- Insert tracks into the table
-INSERT INTO tracks(title, artist_id, album_id) VALUES ('Alright', 2, 1);
+INSERT INTO tracks(title, artist_id, album_id, video_url) VALUES ('Alright', 2, 1, 'https://www.youtube.com/watch?v=Z-48u_uWMHY');
 INSERT INTO tracks(title, artist_id, album_id) VALUES ('King Kunta', 2, 1);
-INSERT INTO tracks(title, artist_id, album_id) VALUES ('Hello', 3, 2);
-INSERT INTO tracks(title, artist_id, album_id) VALUES ('Bad Blood', 4, 3);
+INSERT INTO tracks(title, artist_id, album_id, video_url) VALUES ('Hello', 3, 2, 'https://www.youtube.com/watch?v=YQHsXMglC9A');
+INSERT INTO tracks(title, artist_id, album_id, video_url) VALUES ('Bad Blood', 4, 3, 'https://www.youtube.com/watch?v=QcIy9NiNbmo');
 INSERT INTO tracks(title, artist_id, album_id) VALUES ('Blank Space', 4, 3);
 INSERT INTO tracks(title, artist_id, album_id) VALUES ('Shake It Off', 4, 3);

@@ -1,4 +1,6 @@
 <?php
+    session_start();
+
     // Include the albums controller file
     include("../../controller/albums_controller.php");
 
@@ -10,68 +12,76 @@
 <html lang="en">
     <head>
         <link rel="stylesheet" type="text/css" href="/350_final_project/final_projectStyle.css">
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+        <script src="/350_final_project/preload.js"></script>
         <title>Albums</title>
     </head>
 
     <body>
         <header>
-            <a href="/350_final_project/index.html"><img id="header_logo" src="/350_final_project/icons/site_logo.png" alt="logo" width='15%' height='auto' /></a>
+            <a href="/350_final_project/index.php"><img id="header_logo" src="/350_final_project/icons/site_logo.png" alt="logo" width='15%' height='auto' /></a>
             <h1 id="site_title">Steven Rau - Music Database</h1>
             <nav>
-                <a class="navigation" href="/350_final_project/index.html">Home</a> |
+                <a class="navigation" href="/350_final_project/index.php">Home</a> |
                 <a class="navigation" href="/350_final_project/view/tracks/tracks.php">Tracks</a> |
                 <a class="navigation" href="/350_final_project/view/artists/artists.php">Artists</a> |
                 <a class="active_nav" href="/350_final_project/view/albums/albums.php">Albums</a>
             </nav>
         </header>
 
-        <div id="home_main">
-            <h2> Albums  </h2>
+            <div id="home_main">
 
-            <h3 class="operation_header"> Possible Operations: </h3>
-            <ul id="operation_list">
-                <li class="operation_list">
-                    <a class="operation_list" href="albumAdd.php"> Add a new album </a>
-                </li>
-            </ul>
+            <!-- Ensure that the user is logged in before allowing access to the site -->
+            <?php if (isset($_SESSION['name'])){ ?>
 
-            <!-- Construct the table of all albums -->
-            <h3 class="operation_header"> List of all albums: </h3>
-            <table id="album_list" border="1" cellpadding="5">
-                <tr>
-                    <td class="album_list_header">Album Art</td>
-                    <td class="album_list_header">Title</td>
-                    <td class="album_list_header">Artist</td>
-                    <td class="album_list_header">Artist Image</td>
-                </tr>
-                <?php foreach ($albumsList as $curAlbum) : ?>
-                <tr>
+                <h2> Albums  </h2>
+                <h3 class="operation_header"> Possible Operations: </h3>
+                <ul id="operation_list">
+                    <li class="operation_list">
+                        <a class="operation_list" href="albumAdd.php"> Add a new album </a>
+                    </li>
+                </ul>
 
-                    <td class="imgCol"> <img class="albumImg" src=" <?php echo $curAlbum->artwork_url ?>" /></td>
-                    <td> <?php echo $curAlbum->title ?></td>
-                    <td> <?php echo $curAlbum->artist ?></td>
-                    <td class="imgCol"> <img class="artistImg" src=" <?php echo $curAlbum->artist_img_url ?>" /></td>
+                <!-- Construct the table of all albums -->
+                <h3 class="operation_header"> List of all albums: </h3>
+                <table id="album_list" border="1" cellpadding="5">
+                    <tr>
+                        <td class="album_list_header">Album Art</td>
+                        <td class="album_list_header">Title</td>
+                        <td class="album_list_header">Artist</td>
+                        <td class="album_list_header">Artist Image</td>
+                    </tr>
+                    <?php foreach ($albumsList as $curAlbum) : ?>
+                    <tr>
 
-                    <!-- Get the current albums's id to use in _GET methods -->
-                    <?php $albumId = $curAlbum->id; ?>
+                        <td class="imgCol"> <img class="albumImg" src=" <?php echo $curAlbum->artwork_url ?>" /></td>
+                        <td> <?php echo $curAlbum->title ?></td>
+                        <td> <?php echo $curAlbum->artist ?></td>
+                        <td class="imgCol"> <img class="artistImg" src=" <?php echo $curAlbum->artist_img_url ?>" /></td>
 
-                    <td>
-                        <form name="editAlbum" action="albumUpdate.php" method="GET">
-                            <input type="hidden" name="albumId" value="<?php echo $albumId; ?>"/>
-                            <input type="submit" name="editAlbum" value="Edit"/>
-                        </form>
-                    </td>
-                    <td>
-                        <form name="deleteAlbum" action="albumDelete.php" method="GET">
-                            <input type="hidden" name="albumId" value="<?php echo $albumId; ?>"/>
-                            <input type="submit" name="deleteAlbum" value="Delete"/>
-                        </form>
-                    </td>
-                </tr>
-                <?php endforeach; ?>
-            </table>
+                        <!-- Get the current albums's id to use in _GET methods -->
+                        <?php $albumId = $curAlbum->id; ?>
 
-        </div>
+                        <td>
+                            <form name="editAlbum" action="albumUpdate.php" method="GET">
+                                <input type="hidden" name="albumId" value="<?php echo $albumId; ?>"/>
+                                <input type="submit" class="clickable_button" name="editAlbum" value="Edit"/>
+                            </form>
+                        </td>
+                        <td>
+                            <form name="deleteAlbum" action="albumDelete.php" method="GET">
+                                <input type="hidden" name="albumId" value="<?php echo $albumId; ?>"/>
+                                <input type="submit" class="clickable_button" name="deleteAlbum" value="Delete"/>
+                            </form>
+                        </td>
+                    </tr>
+                    <?php endforeach; ?>
+                </table>
+            <?php } else { ?>
+                <h2> Access denied. </h2>
+                <div id="main_text"> Please return to the home page and login to access the site contents. </div>
+            <?php } ?>
+            </div>
 
 
         <footer>

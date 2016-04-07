@@ -6,25 +6,31 @@
     $controller = new Tracks_Controller();
     $track = $controller->getTrack($_GET['trackId']);
 
-    // If the submit change button was pressed, send info to the controller
+    // If the submit title button was pressed, send info to the controller
     if( isset($_POST['submitNewTitle']) )
     {
         $controller->updateTrackTitle($_GET['trackId'], $_POST['newTitle']);
+    }
+    else if ( isset($_POST['submitNewVidUrl']) )
+    {
+        $controller->updateTrackVidUrl($_GET['trackId'], $_POST['newVidUrl']);
     }
 ?>
 
 <html lang="en">
     <head>
         <link rel="stylesheet" type="text/css" href="/350_final_project/final_projectStyle.css">
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+        <script src="/350_final_project/preload.js"></script>
         <title>Tracks</title>
     </head>
 
     <body>
         <header>
-            <a href="/350_final_project/index.html"><img id="header_logo" src="/350_final_project/icons/site_logo.png" alt="logo" width='15%' height='auto' /></a>
+            <a href="/350_final_project/index.php"><img id="header_logo" src="/350_final_project/icons/site_logo.png" alt="logo" width='15%' height='auto' /></a>
             <h1 id="site_title">Steven Rau - Music Database</h1>
             <nav>
-                <a class="navigation" href="/350_final_project/index.html">Home</a> |
+                <a class="navigation" href="/350_final_project/index.php">Home</a> |
                 <a class="active_nav" href="/350_final_project/view/tracks/tracks.php">Tracks</a> |
                 <a class="navigation" href="/350_final_project/view/artists/artists.php">Artists</a> |
                 <a class="navigation" href="/350_final_project/view/albums/albums.php">Albums</a>
@@ -58,7 +64,14 @@
             <form action="" method="post">
                 New track title:
                 <input class="form_input" type="text" name="newTitle">
-                <input type="submit" name="submitNewTitle" value="Submit">
+                <input type="submit" class="clickable_button" name="submitNewTitle" value="Submit">
+            </form>
+
+            <!-- Use POST form to submit the new video url  -->
+            <form action="" method="post">
+                New music video URL:
+                <input class="form_input" type="text" name="newVidUrl">
+                <input type="submit" class="clickable_button" name="submitNewVidUrl" value="Submit">
             </form>
 
         </div>

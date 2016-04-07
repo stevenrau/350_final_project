@@ -24,15 +24,17 @@
 <html lang="en">
     <head>
         <link rel="stylesheet" type="text/css" href="/350_final_project/final_projectStyle.css">
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+        <script src="/350_final_project/preload.js"></script>
         <title>Albums</title>
     </head>
 
     <body>
         <header>
-            <a href="/350_final_project/index.html"><img id="header_logo" src="/350_final_project/icons/site_logo.png" alt="logo" width='15%' height='auto' /></a>
+            <a href="/350_final_project/index.php"><img id="header_logo" src="/350_final_project/icons/site_logo.png" alt="logo" width='15%' height='auto' /></a>
             <h1 id="site_title">Steven Rau - Music Database</h1>
             <nav>
-                <a class="navigation" href="/350_final_project/index.html">Home</a> |
+                <a class="navigation" href="/350_final_project/index.php">Home</a> |
                 <a class="navigation" href="/350_final_project/view/tracks/tracks.php">Tracks</a> |
                 <a class="navigation" href="/350_final_project/view/artists/artists.php">Artists</a> |
                 <a class="navigation" href="/350_final_project/view/albums/albums.php">Albums</a>
@@ -75,7 +77,7 @@
                 <input type="hidden" name="MAX_FILE_SIZE" value="512000" />
                 Upload new album artwork image:
                 <input type="file" name="newArtwork"  accept="image/*"/>
-                <input type="submit" name="submitNewArtwork" value="Upload" />
+                <input type="submit" class="clickable_button" name="submitNewArtwork" value="Upload" />
             </form>
         </div>
 

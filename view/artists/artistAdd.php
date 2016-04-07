@@ -26,15 +26,17 @@
 <html lang="en">
     <head>
         <link rel="stylesheet" type="text/css" href="/350_final_project/final_projectStyle.css">
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+        <script src="/350_final_project/preload.js"></script>
         <title>Artists</title>
     </head>
 
     <body>
         <header>
-            <a href="/350_final_project/index.html"><img id="header_logo" src="/350_final_project/icons/site_logo.png" alt="logo" width='15%' height='auto' /></a>
+            <a href="/350_final_project/index.php"><img id="header_logo" src="/350_final_project/icons/site_logo.png" alt="logo" width='15%' height='auto' /></a>
             <h1 id="site_title">Steven Rau - Music Database</h1>
             <nav>
-                <a class="navigation" href="/350_final_project/index.html">Home</a> |
+                <a class="navigation" href="/350_final_project/index.php">Home</a> |
                 <a class="navigation" href="/350_final_project/view/tracks/tracks.php">Tracks</a> |
                 <a class="active_nav" href="/350_final_project/view/artists/artists.php">Artists</a> |
                 <a class="navigation" href="/350_final_project/view/albums/albums.php">Albums</a>
@@ -54,7 +56,7 @@
                 Upload artist image (optional):
                 <input type="file" name="newThumbnail"  accept="image/*"/>
                 <br><br>
-                <input type="submit" name="submit" value="Add">
+                <input type="submit" class="clickable_button" name="submit" value="Add">
             </form>
 
 
